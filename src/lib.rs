@@ -23,7 +23,7 @@ impl Debug for TeeData {
 }
 
 impl TeeData {
-    fn new() -> anyhow::Result<Self> {
+    fn new<T: Write + Sync + Send + 'static>(mut stdio: T) -> anyhow::Result<Self> {
         let temp_file = NamedTempFile::new()?;
         let path = temp_file.path().to_path_buf();
         let stop_signal = Arc::new(AtomicBool::new(false));
@@ -33,7 +33,7 @@ impl TeeData {
             let mut buf = [0x00; 1024];
             while !thread_stop_signal.load(Ordering::Relaxed) {
                 let read_bytes = file.read(&mut buf)?;
-                std::io::stderr().write_all(&buf[0..read_bytes])?;
+                stdio.write_all(&buf[0..read_bytes])?;
             }
 
             Ok(())
@@ -59,8 +59,8 @@ impl Drop for TeeData {
 pub struct Tee(Arc<TeeData>);
 
 impl Tee {
-    pub fn new() -> anyhow::Result<Self> {
-        Ok(Self(Arc::new(TeeData::new()?)))
+    pub fn new<T: Write + Sync + Send + 'static>( stdio: T) -> anyhow::Result<Self> {
+        Ok(Self(Arc::new(TeeData::new(stdio)?)))
     }
 
     pub fn get_output(&self) -> anyhow::Result<Vec<u8>> {
