@@ -59,7 +59,7 @@ impl Drop for TeeData {
 pub struct Tee(Arc<TeeData>);
 
 impl Tee {
-    pub fn new<T: Write + Sync + Send + 'static>( stdio: T) -> anyhow::Result<Self> {
+    pub fn new<T: Write + Sync + Send + 'static>(stdio: T) -> anyhow::Result<Self> {
         Ok(Self(Arc::new(TeeData::new(stdio)?)))
     }
 
