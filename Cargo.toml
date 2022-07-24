@@ -1,0 +1,12 @@
+[package]
+name = "tee"
+version = "0.1.0"
+edition = "2021"
+description = "A small adapter object to let you both write to stderr *and* capture that output."
+authors = ["Natalie Jameson <natalie@natalie.wtf>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "*"
+tempfile = "*"
