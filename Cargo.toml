@@ -8,5 +8,5 @@ authors = ["Natalie Jameson <natalie@natalie.wtf>"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-anyhow = "*"
-tempfile = "*"
+anyhow = "1.0.58"
+tempfile = "3.3.0"
