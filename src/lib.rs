@@ -1,9 +1,13 @@
-use std::fmt::{Debug, Formatter};
+use std::fmt::Debug;
+use std::fmt::Formatter;
 use std::fs::File;
-use std::io::{Read, Write};
+use std::io::Read;
+use std::io::Write;
 use std::process::Stdio;
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::atomic::AtomicBool;
+use std::sync::atomic::Ordering;
 use std::sync::Arc;
+
 use tempfile::NamedTempFile;
 
 struct TeeData {
