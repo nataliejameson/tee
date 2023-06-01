@@ -8,4 +8,4 @@ authors = ["Natalie Jameson <natalie@natalie.wtf>"]
 
 [dependencies]
 anyhow = "1.0.58"
-tempfile = "3.3.0"
+tempfile = { version = "3.3.0" }
